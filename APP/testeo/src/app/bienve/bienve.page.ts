@@ -1,7 +1,8 @@
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
-import { Camera, CameraResultType } from '@capacitor/camera';
+import { Component, OnInit, Sanitizer } from '@angular/core';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import jsQR from 'jsqr';
 
 @Component({
   selector: 'app-bienve',
@@ -11,9 +12,8 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 export class BienvePage implements OnInit {
   usuario:string;
   correo: string;
-  imagedata: String;
   contrasena: string;
-  constructor(public alertController:AlertController,private router:Router,public loadingcontroller:LoadingController) {
+  constructor (public alertController:AlertController,private router:Router,public loadingcontroller:LoadingController) {
     this.correo=''
    }
   ngOnInit() {
@@ -45,12 +45,30 @@ export class BienvePage implements OnInit {
   // }
 
  async ini_camara(){
+    const canvas=document.createElement("canvas")
     const image=await Camera.getPhoto({
       quality:100,
       allowEditing:false,
-      resultType:CameraResultType.Uri
+      resultType:CameraResultType.DataUrl,
+      source:CameraSource.Camera
     })
-    this.imagedata=image.dataUrl;
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.src = image.dataUrl;
+    img.onload = () => {
+      img.width = canvas.width;
+      img.height = canvas.height;
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+      const code = jsQR(imgData.data, canvas.width, canvas.height);
+      if (code) {
+        window.location.replace(code.data);
+      } else {
+        this.ini_camara();
+      }
+    };
   }
 
 }
