@@ -1,2 +1,0 @@
-# REGISTRAP
-APP
