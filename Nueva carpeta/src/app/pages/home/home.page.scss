@@ -1,0 +1,53 @@
+.camera-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin: 2rem auto;
+  flex-direction: column;
+  font-weight: bold;
+  border: 3px dashed var(--ion-color-primary);
+
+  img {
+    object-fit: cover;
+    aspect-ratio: 1;
+  }
+
+  ion-icon {
+    font-size: 2.5rem;
+  }
+
+  .camera-items {
+    display: flex;
+  }
+
+  .camera-items > * {
+    flex: 1;
+  }
+}
+.scan-msg {
+  display: block;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.attendance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 1.2rem;
+  text-align: center;
+
+  img {
+    margin: 2rem 0;
+    width: 30%;
+  }
+
+  .back-btn {
+    margin-top: 2rem;
+  }
+}

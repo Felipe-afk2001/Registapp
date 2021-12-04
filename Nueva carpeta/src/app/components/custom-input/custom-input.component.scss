@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  label {
+    align-self: flex-start;
+    margin-bottom: 8px;
+    color: #FFB800;
+    font-size: large;
+  }
+
+  input {
+    border-radius: 0.6rem;
+    background-color: #fff;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+    border: 0;
+    outline: none;
+    padding: 0.9rem;
+    width: 100%;
+    transition: box-shadow 300ms;
+    border-color: #011325;
+    border-style: solid;
+    border-width: 2px;
+
+    &:focus {
+      box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.4);
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<app-header></app-header>
+<ion-content>
+  <form (ngSubmit)="submitLogin()" [formGroup]="loginForm" class="login-form">
+    <h1 class="ion-text-center ion-padding-bottom">
+      <ion-text color="warning">Inicia Sesión</ion-text>
+    </h1>
+    <app-custom-input type="text" name="username" controlName="username">
+      Nombre de usuario:
+    </app-custom-input>
+    <app-custom-input type="password" name="password" controlName="password">
+      Contraseña:
+    </app-custom-input>
+    <ion-item>
+      <ion-label style="color: #FFB800;">Recuerdame</ion-label>
+      <ion-checkbox formControlName="keepConnected" slot="end"></ion-checkbox>
+    </ion-item>
+    <ion-button type="submit" class="boton rojo">Ingresar</ion-button>
+    <div class="links">
+      <a routerLink="/reset-password">¿Olvidó su contraseña?</a>
+      <!-- <a routerLink="/register">Registrate aquí</a> -->
+    </div>
+  </form>
+  <div class="weather" *ngIf="weather">
+    <img [src]="weatherIcon" />
+    {{ weather.main.temp }}°C
+  </div>
+  <!-- <p class="version"><ion-text color="medium">version: 0.0.1a</ion-text></p> -->
+</ion-content>

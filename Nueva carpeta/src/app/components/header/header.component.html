@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons *ngIf="back" slot="start">
+      <ion-back-button mode="md" [defaultHref]="back"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="logout" slot="end">
+      <ion-icon (click)="logoutUser()" name="log-out-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title mode="ios">
+      <app-logo></app-logo>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>

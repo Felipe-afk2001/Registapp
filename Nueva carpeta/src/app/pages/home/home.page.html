@@ -1,0 +1,56 @@
+<app-header logout="true"></app-header>
+<ion-content>
+  <div class="container">
+    <h2 class="ion-text-center" *ngIf="userData$ | async as user">
+      <ion-text color="primary">Bienvenido {{ user.first_name }}</ion-text>
+    </h2>
+    <video
+      #video
+      [hidden]="!scanActive"
+      class="camera-container"
+      width="100%"
+      height="100%"
+    ></video>
+    <canvas #canvas hidden></canvas>
+    <div
+      class="camera-container"
+      (click)="startScan()"
+      *ngIf="!scanActive && !userRegistered && !errorMsg && !attendanceRegistered"
+    >
+      <div class="camera-items">
+        <ion-icon name="camera-outline"></ion-icon>
+        <ion-text color="primary">Escanear Código QR</ion-text>
+      </div>
+    </div>
+    <div
+      class="attendance"
+      *ngIf="!scanActive && (errorMsg || attendanceRegistered)"
+    >
+      <ng-container *ngIf="!errorMsg && attendanceRegistered">
+        <img src="../../../assets/check.svg" alt="Asistencia registrada" />
+        <ion-text color="primary">
+          Se ha registrado tu asistencia para {{ courseName }}
+        </ion-text>
+        <ion-button class="back-btn" (click)="reset()">Volver</ion-button>
+      </ng-container>
+      <ng-container *ngIf="errorMsg">
+        <img src="../../../assets/error.svg" alt="Error" />
+        <ion-text color="primary"> {{ errorMsg }} </ion-text>
+        <ion-button class="back-btn" (click)="startScan()"
+          >Volver a intentar</ion-button
+        >
+      </ng-container>
+    </div>
+    <ion-button *ngIf="scanActive" class="back-btn" (click)="stopScan()"
+      >Detener escaneo</ion-button
+    >
+    <ion-text
+      *ngIf="!attendanceRegistered && !errorMsg && !userRegistered && !scanActive"
+      color="primary"
+      class="scan-msg"
+    >
+      {{text}}
+      <b>Escanee el código QR para registrar su asistencia.</b>
+    </ion-text>
+  </div>
+</ion-content>
